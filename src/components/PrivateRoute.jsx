@@ -6,6 +6,8 @@ export default function PrivateRoute({ children }) {
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState();
+  const [users, setUsers] = useState();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -17,12 +19,13 @@ export default function PrivateRoute({ children }) {
   }, []);
 
   const isUserLogin = (userData) => {
-    let isInputLogin = userData[0].some((userID) => {
+    let updatedDate = userData.map((user) => user[0]);
+
+    let isInputLogin = updatedDate.some((userID) => {
       return getUserFromCookie().userToken === userID;
     });
 
     setIsLogin(isInputLogin);
-
 
     setIsLoading(false);
   };

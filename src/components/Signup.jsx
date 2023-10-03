@@ -21,13 +21,11 @@ export default function Login() {
       password,
     };
 
-    users.forEach((user) => {
-      if (user[1].name === userInfo.name) {
-        console.log("this username alreadySignedUp");
-      } else {
-        addUser();
-      }
+    let isAlreadySignUp = users.some((user) => {
+      return user[1].name === userInfo.name;
     });
+
+    isAlreadySignUp ? console.log("this username alreadySignedUp") : addUser();
   };
 
   const addUser = async () => {
