@@ -19,9 +19,9 @@ export default function PrivateRoute({ children }) {
   }, []);
 
   const isUserLogin = (userData) => {
-    let updatedDate = userData.map((user) => user[0]);
+    let updatedData = userData.map((user) => user[0]);
 
-    let isInputLogin = updatedDate.some((userID) => {
+    let isInputLogin = updatedData.some((userID) => {
       return getUserFromCookie().userToken === userID;
     });
 

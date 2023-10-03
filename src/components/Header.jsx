@@ -16,11 +16,13 @@ export default function Header() {
   }, []);
 
   const isUserLogin = (userData) => {
-    if (userData[0].some((userID) => getUserFromCookie().userToken === userID)) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
+    let updatedData = userData.map((user) => user[0]);
+
+    let isInputLogin = updatedData.some((userID) => {
+      return getUserFromCookie().userToken === userID;
+    });
+
+    setIsLogin(isInputLogin);
   };
 
   const logOutUser = (event) => {
