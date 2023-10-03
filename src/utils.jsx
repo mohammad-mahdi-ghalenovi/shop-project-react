@@ -1,4 +1,3 @@
-
 export const findUser = (userID) => {
   const fetchUsers = async () => {
     let fetchedData = await fetch(
@@ -42,7 +41,7 @@ export const getAllUsers = async () => {
       "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json"
     );
     let response = await fetchedData.json();
-    const userData = Object.entries(response).map((user) => user[0]);
+    const userData = Object.entries(response);
     // do something with userData
     return userData;
   };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserFromCookie } from "./../utils";
+import { findUser, getUserFromCookie, getAllUsers } from "./../utils";
 
 export default function Login() {
   const [users, setUsers] = useState([]);
@@ -10,14 +10,9 @@ export default function Login() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      let fetchedData = await fetch(
-        "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json"
-      );
-      let response = await fetchedData.json();
-      const userData = Object.entries(response);
-      setUsers(userData);
-    };
+    async function fetchUsers() {
+      setUsers(await getAllUsers());
+    }
 
     fetchUsers();
   }, []);

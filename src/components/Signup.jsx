@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { findUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function Login() {
   const [users, setUsers] = useState([]);
@@ -7,17 +8,27 @@ export default function Login() {
   const [getUsers, setGetUsers] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      let fetchedData = await fetch(
-        "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json"
-      );
-      let response = await fetchedData.json();
-      const userData = Object.entries(response).map((user) => user[1]);
-      setUsers(userData);
-    };
+    async function fetchUsers() {
+      setUsers(await getAllUsers());
+    }
 
     fetchUsers();
   }, [getUsers]);
+
+  const isUserDuplicated = () => {
+    let userInfo = {
+      name,
+      password,
+    };
+
+    users.forEach((user) => {
+      if (user[1].name === userInfo.name) {
+        console.log("this username alreadySignedUp");
+      } else {
+        addUser();
+      }
+    });
+  };
 
   const addUser = async () => {
     let newUser = {
@@ -57,7 +68,7 @@ export default function Login() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <button onClick={addUser}>Submit</button>
+      <button onClick={isUserDuplicated}>Submit</button>
     </>
   );
 }

@@ -8,20 +8,21 @@ export default function PrivateRoute({ children }) {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    async function getUsers() {
+    async function fetchUsers() {
       isUserLogin(await getAllUsers());
       setUser(await findUser(getUserFromCookie().userToken));
     }
 
-    getUsers();
+    fetchUsers();
   }, []);
 
   const isUserLogin = (userData) => {
-    if (userData.some((userID) => getUserFromCookie().userToken === userID)) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
+    let isInputLogin = userData[0].some((userID) => {
+      return getUserFromCookie().userToken === userID;
+    });
+
+    setIsLogin(isInputLogin);
+
 
     setIsLoading(false);
   };
@@ -35,6 +36,6 @@ export default function PrivateRoute({ children }) {
       {children}
     </>
   ) : (
-    <Navigate to="/signup" />
+    "login first"
   );
 }

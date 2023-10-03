@@ -7,16 +7,16 @@ export default function Header() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    async function getUsers() {
+    async function fetchUsers() {
       isUserLogin(await getAllUsers());
       setUser(await findUser(getUserFromCookie().userToken));
     }
 
-    getUsers();
+    fetchUsers();
   }, []);
 
   const isUserLogin = (userData) => {
-    if (userData.some((userID) => getUserFromCookie().userToken === userID)) {
+    if (userData[0].some((userID) => getUserFromCookie().userToken === userID)) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
