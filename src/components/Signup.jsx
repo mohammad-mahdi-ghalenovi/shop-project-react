@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { findUser, getUserFromCookie, getAllUsers } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("mmd");
   const [password, setPassword] = useState("321");
   const [getUsers, setGetUsers] = useState(false);
+
+  let navigate = useNavigate()
 
   useEffect(() => {
     async function fetchUsers() {
@@ -49,6 +52,7 @@ export default function Login() {
     setGetUsers((prev) => !prev);
     setName("");
     setPassword("");
+    navigate("/login")
   };
 
   return (
