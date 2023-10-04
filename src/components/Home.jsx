@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
 import Products from "./Products";
+import Header from "./Header";
 
 export default function Home() {
   return (

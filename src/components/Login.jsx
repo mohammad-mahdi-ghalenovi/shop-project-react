@@ -43,8 +43,6 @@ export default function Login() {
         setCookies(userInfo, user[0]);
       }
     });
-
-    console.log("sign up first");
   };
 
   const setCookies = (user, userToken) => {

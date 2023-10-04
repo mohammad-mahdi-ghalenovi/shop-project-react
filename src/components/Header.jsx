@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { findUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState();
+
+  let navigate = useNavigate()
 
   useEffect(() => {
     async function fetchUsers() {
@@ -58,6 +60,7 @@ export default function Header() {
 
       <div className="header__paths">
         <Link to="/basket"> Basket </Link>
+        <Link to="/"> Home </Link>
       </div>
     </div>
   );

@@ -5,8 +5,14 @@ import Product from "./Product";
 import { findUser, putUser, getUserFromCookie, getAllUsers } from "./../utils";
 
 export default function Products() {
+  const [productInfos, setProductInfos] = useState([
+    { id: 1, name: "Mouse", price: 200, count: 1, isLoading: false },
+    { id: 2, name: "Kayboard", price: 300, count: 1, isLoading: false },
+    { id: 3, name: "MousePad", price: 10, count: 1, isLoading: false },
+  ]);
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -19,12 +25,6 @@ export default function Products() {
     fetchUsers();
   }, []);
 
-  let productInfos = [
-    { id: 1, name: "Mouse", price: 200, count: 1 },
-    { id: 2, name: "Kayboard", price: 300, count: 1 },
-    { id: 3, name: "MousePad", price: 10, count: 1 },
-  ];
-
   const isUserLogin = (userData) => {
     let updatedData = userData.map((user) => user[0]);
 
@@ -35,6 +35,7 @@ export default function Products() {
     setIsLogin(isInputLogin);
   };
 
+  // get product ID from Product Component
   const getProductID = (productID) => {
     if (isLogin) {
       addProductToCart(productID);
@@ -45,10 +46,12 @@ export default function Products() {
 
   const addProductToCart = async (productID) => {
     let mainProduct = productInfos.find((product) => product.id === productID);
-    let mainUser = await findUser(user[0]);
     let isCount = false;
 
-    mainUser[1].basket.some((product) => {
+    mainProduct.isLoading = true;
+    setIsLoading(true);
+
+    user[1].basket.some((product) => {
       if (product.id == mainProduct.id) {
         product.count = product.count + 1;
         isCount = true;
@@ -56,11 +59,15 @@ export default function Products() {
     });
 
     if (!isCount) {
-      mainUser[1].basket.push(mainProduct);
+      user[1].basket.push(mainProduct);
       isCount = false;
     }
 
-    await putUser(getUserFromCookie().userToken, mainUser[1]);
+    let update = await putUser(getUserFromCookie().userToken, user[1]);
+    if (update) {
+      mainProduct.isLoading = false;
+      setIsLoading(false);
+    }
   };
 
   return (

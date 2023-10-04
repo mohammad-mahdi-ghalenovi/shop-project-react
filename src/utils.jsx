@@ -14,6 +14,7 @@ export const findUser = (userID) => {
 };
 
 export const putUser = async (userID, userObj) => {
+  let isSuccess = false;
   // get user and put to firebase
   if (userObj) {
     let updatedBasket = [...userObj.basket];
@@ -31,8 +32,12 @@ export const putUser = async (userID, userObj) => {
         method: "PUT",
         body: JSON.stringify(userObj),
       }
-    );
+    )
+      .then((res) => (isSuccess = true))
+      .catch((err) => (isSuccess = true));
   }
+
+  return isSuccess;
 };
 
 export const getAllUsers = async () => {
