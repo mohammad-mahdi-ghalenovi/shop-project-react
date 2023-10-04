@@ -10,14 +10,6 @@ let routes = [
   { path: "/signup", element: <Signup /> },
   { path: "/Login", element: <Login /> },
   {
-    path: "/products",
-    element: (
-      <PrivateRoute>
-        <Products />
-      </PrivateRoute>
-    ),
-  },
-  {
     path: "/basket",
     element: (
       <PrivateRoute>

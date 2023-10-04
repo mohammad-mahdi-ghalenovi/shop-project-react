@@ -39,7 +39,7 @@ export default function Login() {
         user[1].name === userInfo.name &&
         user[1].password === userInfo.password
       ) {
-        navigate(`/products`);
+        navigate(`/`);
         setCookies(userInfo, user[0]);
       }
     });

@@ -1,10 +1,10 @@
 import React from "react";
 
 export default function Product(props) {
-  let { id, name, price, addProductToCart } = props;
+  let { id, name, price, getProductID } = props;
 
-  function clickHandler (id) {
-    addProductToCart(id)
+  function clickHandler(id) {
+    getProductID(id);
   }
 
   return (

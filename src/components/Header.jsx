@@ -57,7 +57,6 @@ export default function Header() {
       )}
 
       <div className="header__paths">
-        <Link to="/products"> Products </Link>
         <Link to="/basket"> Basket </Link>
       </div>
     </div>

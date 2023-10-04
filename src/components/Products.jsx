@@ -1,16 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import Product from "./Product";
-import { findUser, putUser, getUserFromCookie } from "./../utils";
+import { findUser, putUser, getUserFromCookie, getAllUsers } from "./../utils";
 
 export default function Products() {
   const [user, setUser] = useState();
+  const [isLogin, setIsLogin] = useState(false);
 
-  let params = useParams();
+  let navigate = useNavigate();
 
   useEffect(() => {
-    setUser(getUserFromCookie());
+    async function fetchUsers() {
+      isUserLogin(await getAllUsers());
+      setUser(await findUser(getUserFromCookie().userToken));
+    }
+
+    fetchUsers();
   }, []);
 
   let productInfos = [
@@ -19,9 +25,27 @@ export default function Products() {
     { id: 3, name: "MousePad", price: 10, count: 1 },
   ];
 
+  const isUserLogin = (userData) => {
+    let updatedData = userData.map((user) => user[0]);
+
+    let isInputLogin = updatedData.some((userID) => {
+      return getUserFromCookie().userToken === userID;
+    });
+
+    setIsLogin(isInputLogin);
+  };
+
+  const getProductID = (productID) => {
+    if (isLogin) {
+      addProductToCart(productID);
+    } else {
+      navigate("/login");
+    }
+  };
+
   const addProductToCart = async (productID) => {
     let mainProduct = productInfos.find((product) => product.id === productID);
-    let mainUser = await findUser(user.userToken);
+    let mainUser = await findUser(user[0]);
     let isCount = false;
 
     mainUser[1].basket.some((product) => {
@@ -43,15 +67,9 @@ export default function Products() {
     <>
       <div className="product-container">
         {productInfos.map((product) => (
-          <Product
-            key={product.id}
-            {...product}
-            addProductToCart={addProductToCart}
-          />
+          <Product key={product.id} {...product} getProductID={getProductID} />
         ))}
       </div>
-
-      <Link to={"/basket"}>Basket</Link>
     </>
   );
 }

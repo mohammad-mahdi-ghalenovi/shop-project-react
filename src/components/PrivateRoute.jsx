@@ -6,9 +6,7 @@ export default function PrivateRoute({ children }) {
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState();
-  const [users, setUsers] = useState();
-  const [isSuccess, setIsSuccess] = useState(false);
-
+  
   useEffect(() => {
     async function fetchUsers() {
       isUserLogin(await getAllUsers());
