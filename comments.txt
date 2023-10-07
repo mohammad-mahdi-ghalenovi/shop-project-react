@@ -1,0 +1,5 @@
+add comments feature for products 
+1 - add all products in DB
+2 - add an array for comments for each products
+3 - only loggedin users can add comments for products
+4 - put the comments components end of each productPages

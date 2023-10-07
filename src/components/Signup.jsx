@@ -8,7 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState("321");
   const [getUsers, setGetUsers] = useState(false);
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUsers() {
@@ -52,7 +52,7 @@ export default function Login() {
     setGetUsers((prev) => !prev);
     setName("");
     setPassword("");
-    navigate("/login")
+    navigate("/login");
   };
 
   return (
