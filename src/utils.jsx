@@ -70,3 +70,19 @@ export const getUserFromCookie = () => {
 
   return loggedInUser;
 };
+
+export const getAllProducts = async () => {
+  const getProducts = async () => {
+    let fetchedData = await fetch(
+      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products.json"
+    );
+    let response = await fetchedData.json();
+    const userData = Object.entries(response).map(product => product[1])
+    // do something with userData
+    return userData;
+  };
+
+  let result = await getProducts();
+
+  return result;
+};

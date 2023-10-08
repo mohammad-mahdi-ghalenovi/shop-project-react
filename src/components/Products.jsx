@@ -1,12 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ProductDatas from "../ProductDatas";
 import Product from "./Product";
-import { findUser, putUser, getUserFromCookie, getAllUsers } from "./../utils";
+import {
+  findUser,
+  putUser,
+  getUserFromCookie,
+  getAllUsers,
+  getAllProducts,
+} from "./../utils";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState([...ProductDatas]);
+  const [productInfos, setProductInfos] = useState();
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,12 +19,13 @@ export default function Products() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchDatas() {
       isUserLogin(await getAllUsers());
       setUser(await findUser(getUserFromCookie().userToken));
+      setProductInfos(await getAllProducts());
     }
 
-    fetchUsers();
+    fetchDatas();
   }, []);
 
   const isUserLogin = (userData) => {
@@ -74,7 +80,7 @@ export default function Products() {
   return (
     <>
       <div className="product-container">
-        {productInfos.map((product) => (
+        {productInfos && productInfos.map((product) => (
           <Product
             key={product.id}
             {...product}
