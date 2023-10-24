@@ -1,0 +1,35 @@
+.SmWidget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    width: 100%;
+    padding: 12px 16px;
+}
+
+.SmWidget__profile {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.SmWidget__infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SmWidget-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.SmWidget-posotion {
+    color: gray;
+}
+
+.SmWidget__eye {
+    cursor: pointer;
+}

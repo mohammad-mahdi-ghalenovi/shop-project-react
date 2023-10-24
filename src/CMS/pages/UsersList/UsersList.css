@@ -1,0 +1,45 @@
+.users-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.user-infos {
+    display: flex;
+    gap: 0 10px;
+    align-items: center;
+}
+
+.user-infos__profile {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.user-infos__name {}
+
+.user-actions {
+    display: flex;
+    justify-content: space-around;
+    color: Red;
+}
+
+.user-actions .actions__button {
+    margin-right: 20px;
+    border: none;
+    padding: 4px 14px;
+    border-radius: 10px;
+    background-color: #3AB276;
+    color: white;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.user-actions .actions__button:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.user-actions .actions__remove {
+    cursor: pointer;
+}

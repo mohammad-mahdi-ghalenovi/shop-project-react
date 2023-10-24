@@ -1,0 +1,30 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+p,
+h5,
+h4,
+h3,
+h2,
+h1 {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    box-sizing: inherit;
+}
+
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}

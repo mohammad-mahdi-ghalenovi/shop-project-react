@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { findUser, putUser, getUserFromCookie } from "./../utils";
+import { findUser, putUser, getUserFromCookie } from "../utils";
+import Header from "./Header";
 
 export default function Basket() {
   const [user, setUser] = useState();
@@ -77,6 +78,7 @@ export default function Basket() {
 
   return (
     <>
+      <Header />
       <h1>Basket</h1>
       {user &&
         user.basket

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { findUser, getUserFromCookie, getAllUsers } from "./../utils";
+import { findUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function PrivateRoute({ children }) {
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState();
-  
+
   useEffect(() => {
     async function fetchUsers() {
       isUserLogin(await getAllUsers());

@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.product-container {
+.product-contasiner {
     display: flex;
     justify-content: space-around;
     padding: 3rem;

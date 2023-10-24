@@ -1,0 +1,32 @@
+.features-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.feature-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 14px 30px;
+    width: 100%;
+    border-radius: 6px;
+    min-height: 160px;
+}
+
+.feature-infos {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.feature__price {
+    margin-right: 20px;
+}
+
+.feature__status {
+    display: flex;
+    gap: 5px;
+}

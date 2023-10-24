@@ -2,16 +2,25 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./Product";
-import {
-  findUser,
-  putUser,
-  getUserFromCookie,
-  getAllUsers,
-  getAllProducts,
-} from "./../utils";
+import { findUser, putUser, getUserFromCookie, getAllUsers } from "./../utils";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState();
+  const [productInfos, setProductInfos] = useState([
+    {
+      id: 1,
+      name: "mouse ",
+      price: 200,
+      count: 1,
+      isLoading: false,
+    },
+    {
+      id: 2,
+      name: "keyboard",
+      price: 300,
+      count: 1,
+      isLoading: false,
+    },
+  ]);
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +31,6 @@ export default function Products() {
     async function fetchDatas() {
       isUserLogin(await getAllUsers());
       setUser(await findUser(getUserFromCookie().userToken));
-      setProductInfos(await getAllProducts());
     }
 
     fetchDatas();
@@ -80,14 +88,15 @@ export default function Products() {
   return (
     <>
       <div className="product-container">
-        {productInfos && productInfos.map((product) => (
-          <Product
-            key={product.id}
-            {...product}
-            getProductID={getProductID}
-            redirectToProductPage={redirectToProductPage}
-          />
-        ))}
+        {productInfos &&
+          productInfos.map((product) => (
+            <Product
+              key={product.id}
+              {...product}
+              getProductID={getProductID}
+              redirectToProductPage={redirectToProductPage}
+            />
+          ))}
       </div>
     </>
   );

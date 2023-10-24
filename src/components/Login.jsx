@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { findUser, getUserFromCookie, getAllUsers } from "./../utils";
+import { findUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function Login() {
   const [users, setUsers] = useState([]);

@@ -1,0 +1,48 @@
+.largewidget-container {}
+
+.largewidget__customer {
+    display: flex;
+    align-items: center;
+    margin-top: 23px;
+}
+
+.customer-profile {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.customer-name {}
+
+.largewidget__date {
+    color: gray;
+}
+
+.largewidget__amount {
+    color: gray;
+}
+
+.largewidget__status {}
+
+.largewidget__status .status-button {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 8px;
+}
+
+.status-button.Success {
+    color: green;
+    background-color: #E5FCF3;
+}
+
+.status-button.Declined {
+    color: red;
+    background-color: #FDF1F2;
+}
+
+.status-button.Pending {
+    color: blue;
+    background-color: #EAF3FF;
+}
