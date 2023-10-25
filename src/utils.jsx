@@ -70,3 +70,12 @@ export const getUserFromCookie = () => {
 
   return loggedInUser;
 };
+
+export const deleteUser = async (userID) => {
+  await fetch(
+    `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users/${userID}.json`,
+    {
+      method: "DELETE",
+    }
+  ).then((res) => console.log(res));
+};

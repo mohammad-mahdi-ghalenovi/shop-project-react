@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import { users } from "../../../data";
+import { getAllUsers, deleteUser } from "./../../../utils";
 import "./UsersList.css";
 
 export default function UserList() {
-  const [usersInfo, setUsersInfo] = useState(users);
+  const [users, setUsers] = useState();
 
-  const removeUser = (userID) => {
-    setUsersInfo(usersInfo.filter((user) => user.id !== userID));
+  useEffect(() => {
+    const getDatas = async () => {
+      setUsers(await getAllUsers());
+    };
+
+    getDatas();
+  }, []);
+
+  const removeUser = async (userID) => {
+    let mainUser = users.find((product) => {
+      return product[1].id == userID;
+    });
+
+    await deleteUser(mainUser[0]);
+    const updatedUsers = users.filter((user) => user[1].id !== userID);
+    setUsers(updatedUsers);
   };
 
   let columns = [
@@ -31,8 +45,7 @@ export default function UserList() {
       },
       width: 150,
     },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "transaction", headerName: "Transaction", width: 150 },
+    { field: "password", headerName: "Password", width: 200 },
     {
       field: "action",
       headerName: "Action",
@@ -55,7 +68,11 @@ export default function UserList() {
 
   return (
     <div className="users-container">
-      <DataGrid rows={usersInfo} columns={columns} />
+      {users ? (
+        <DataGrid rows={users.map((user) => user[1])} columns={columns} />
+      ) : (
+        "loading"
+      )}
     </div>
   );
 }
