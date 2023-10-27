@@ -34,7 +34,7 @@ export const putUser = async (userID, userObj) => {
       }
     )
       .then((res) => (isSuccess = true))
-      .catch((err) => (isSuccess = true));
+      .catch((err) => (isSuccess = false));
   }
 
   return isSuccess;

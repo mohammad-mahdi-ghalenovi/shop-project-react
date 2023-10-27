@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 import { Link } from "react-router-dom";
-import { getAllUsers, deleteUser } from "./../../../utils";
+import { getAllUsers, deleteUser } from "../../../utils";
 import "./UsersList.css";
 
 export default function UserList() {
@@ -52,8 +54,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="user-actions">
-            <Link to={`/user/${params.row.id}`} className="actions__button">
-              {" "}
+            <Link to={`/cms/user/${params.row.id}`} className="actions__button">
               Edit
             </Link>
             <DeleteOutlineIcon
@@ -71,7 +72,9 @@ export default function UserList() {
       {users ? (
         <DataGrid rows={users.map((user) => user[1])} columns={columns} />
       ) : (
-        "loading"
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
       )}
     </div>
   );

@@ -1,10 +1,11 @@
 import React from "react";
 import Features from "../../components/Features/Features";
-// import Chart from "../../components/Chart/Chart";
+import Chart from "../../components/Chart/Chart";
 import SmWidget from "../../components/SmWidget/SmWidget";
 import Lwidget from "../../components/Lwidget/Lwidget";
 import { newWidgets } from "./../../../data";
 import { transActionWidgets } from "./../../../data";
+import {datas} from "./../../../data"
 import "./Home.css";
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
       <Features />
 
       <div className="chart-wrapper">
-        {/* <Chart
+        <Chart
           data={datas}
           title="Sales Analytics"
           xDataKey="name"
@@ -21,7 +22,7 @@ export default function Home() {
           width={99}
           isYAxisVisible
           grid
-        /> */}
+        />
       </div>
 
       <div className="widgets-container">

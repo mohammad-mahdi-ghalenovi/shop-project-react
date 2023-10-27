@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "./../../../data";
-// import Chart from "./../../components/Chart/Chart";
+import Chart from "./../../components/Chart/Chart";
 import "./Product.css";
 
 export default function Product() {
@@ -20,7 +20,7 @@ export default function Product() {
     <>
       <div className="product-container">
         <div className="product-chart">
-          {/* {mainProduct && (
+          {mainProduct && (
             <Chart
               data={mainProduct.sales}
               title="Product Sales Analytics"
@@ -28,7 +28,7 @@ export default function Product() {
               lineDataKey="sale"
               width={100}
             />
-          )} */}
+          )}
         </div>
 
         {mainProduct && (

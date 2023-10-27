@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./Product";
-import { findUser, putUser, getUserFromCookie, getAllUsers } from "./../utils";
+import { findUser, putUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function Products() {
   const [productInfos, setProductInfos] = useState([

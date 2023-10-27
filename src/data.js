@@ -28,19 +28,6 @@ export let newWidgets = [
     { id: 3, name: "MMD", position: "Back-End Developer", profile: "widgets/mmd.jpg" },
 ]
 
-// Users
-export let users = [
-    { id: 1, profile: '/widgets/mahdi.jpg', name: 'Jon', age: 35, email: "mahdi138@gmail.com", transaction: 213 },
-    { id: 2, profile: '/widgets/mahdi.jpg', name: 'Cersei', age: 42, email: "mahdi138@gmail.com", transaction: 321 },
-    { id: 3, profile: '/widgets/mahdi.jpg', name: 'Jaime', age: 45, email: "mahdi138@gmail.com", transaction: 464 },
-    { id: 4, profile: '/widgets/mahdi.jpg', name: 'Arya', age: 16, email: "mahdi138@gmail.com", transaction: 164 },
-    { id: 5, profile: '/widgets/mahdi.jpg', name: 'Daenerys', age: 22, email: "mahdi138@gmail.com", transaction: 124 },
-    { id: 6, profile: '/widgets/mahdi.jpg', name: "Anna", age: 50, email: "mahdi138@gmail.com", transaction: 142 },
-    { id: 7, profile: '/widgets/mahdi.jpg', name: 'Ferrara', age: 44, email: "mahdi138@gmail.com", transaction: 982 },
-    { id: 8, profile: '/widgets/mahdi.jpg', name: 'Rossini', age: 36, email: "mahdi138@gmail.com", transaction: 552 },
-    { id: 9, profile: '/widgets/mahdi.jpg', name: 'Harvey', age: 65, email: "mahdi138@gmail.com", transaction: 162 },
-];
-
 export let products = [
     {
         id: 1, name: "Keboard", price: 200, picture: "/products/keyboard.jpg",

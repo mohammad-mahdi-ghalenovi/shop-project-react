@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { findUser, getUserFromCookie, getAllUsers } from "../utils"; 
+import { findUser, getUserFromCookie, getAllUsers } from "../utils";
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
