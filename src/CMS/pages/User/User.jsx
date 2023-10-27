@@ -5,11 +5,13 @@ import { getAllUsers, putUser } from "../../../utils";
 import { useParams } from "react-router-dom";
 import "./User.css";
 import Chart from "../../components/Chart/Chart";
+import Alert from "@mui/material/Alert";
 
 export default function User() {
   const [users, setUsers] = useState();
   const [user, setUser] = useState();
   const [isEditing, setIsEditing] = useState(false);
+  const [isSuccessed, setIsSuccessed] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,11 +43,12 @@ export default function User() {
     newUser.password = password;
 
     let isSuccessed = putUser(user[0], newUser);
-    
+
     if (isSuccessed) {
-      console.log("edited");
-    } else {
-      console.log("sth went wrong!");
+      setIsSuccessed(true);
+      setTimeout(() => {
+        setIsSuccessed(false);
+      }, 3000);
     }
   };
 
@@ -53,40 +56,64 @@ export default function User() {
     <>
       {user ? (
         <div className="user-container">
+          {isSuccessed && (
+            <Alert  variant="filled" severity="success">
+              User Edited Successfully — check it out!
+            </Alert>
+          )}
           <div className="user-chart">
             {/* <Chart title="User Analytics" /> */}
           </div>
           <div className="user-details">
             <span>
-              Name :
+              <p>Name :</p>
               <input
                 type="text"
-                className={isEditing ? "active" : ""}
+                className={
+                  isEditing
+                    ? "active user-details__input"
+                    : "user-details__input"
+                }
                 value={isEditing ? name : user[1].name}
                 onChange={(e) => setName(e.target.value)}
               />
             </span>
             <span>
-              Password :
+              <p>Password :</p>
               <input
                 type="text"
-                className={isEditing ? "active" : ""}
+                className={
+                  isEditing
+                    ? "active user-details__input"
+                    : "user-details__input"
+                }
                 value={isEditing ? password : user[1].password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </span>
+
             <span>Basket Length : {user[1].basket.length - 1} </span>
-            <button className="user-details__edit" onClick={editToggler}>
-              {isEditing ? "Decline Editing" : "Edit User"}
-            </button>
-            {isEditing && (
+
+            <div className="user-details-controls">
               <button
-                className="user-details__submit"
-                onClick={submitEditedUser}
+                className={
+                  isEditing
+                    ? "user-details__edit--cancel "
+                    : "user-details__edit"
+                }
+                onClick={editToggler}
               >
-                Submit Changes
+                {isEditing ? "Decline Editing" : "Edit User"}
               </button>
-            )}
+              {isEditing && (
+                <button
+                  className="user-details__submit"
+                  onClick={submitEditedUser}
+                >
+                  Submit Changes
+                </button>
+              )}
+            </div>
           </div>
         </div>
       ) : (

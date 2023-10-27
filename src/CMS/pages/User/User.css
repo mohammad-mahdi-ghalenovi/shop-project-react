@@ -14,15 +14,72 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.user-chart {}
+
 .user-details {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    gap: 20px;
 }
 
-.user-chart {}
+.user-details>span {
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+}
 
-input.active {
-    border: 1px solid green;
+.user-details>span>* {
+    flex-basis: 50%;
+}
+
+.user-details__input {
+    width: 200px;
+    padding: 8px 10px;
+    border-radius: 10px;
     transition: 0.4s ease;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    opacity: 0.5;
+}
+
+.user-details__input:focus {
+    outline: none;
+}
+
+.user-details__input.active {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2),
+        0px 4px 8px rgba(0, 0, 0, 0.1),
+        0px 8px 16px rgba(0, 0, 0, 0.08);
+    opacity: 1;
+}
+
+
+.user-details-controls {
+    display: flex;
+    gap: 10px;
+
+}
+
+.user-details-controls>button {
+    border-radius: 10px;
+    padding: 5px 8px;
+    border: none;
+    text-wrap: nowrap;
+    cursor: pointer;
+}
+
+.user-details__edit {
+    color: blue;
+    background-color: #EAF3FF;
+}
+
+.user-details__edit--cancel {
+    color: red;
+    background-color: #FDF1F2;
+}
+
+.user-details__submit {
+    color: green;
+    background-color: #E5FCF3;
 }
