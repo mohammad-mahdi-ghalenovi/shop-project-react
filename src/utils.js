@@ -1,3 +1,15 @@
+export const isUserLogin = async () => {
+  let allUsers = await getAllUsers()
+  let mainUserToken = getUserFromCookie().userToken
+
+  allUsers = allUsers.map(user => user[0])
+
+  return allUsers.some((userID) => {
+    return mainUserToken === userID;
+  });
+
+}
+
 export const findUser = (userID) => {
   const fetchUsers = async () => {
     let fetchedData = await fetch(

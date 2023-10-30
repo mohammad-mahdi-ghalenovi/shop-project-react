@@ -2,25 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./Product";
-import { findUser, putUser, getUserFromCookie, getAllUsers } from "../utils";
+import { findUser, putUser, getUserFromCookie, isUserLogin } from "../utils";
+import { products } from "./../data";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState([
-    {
-      id: 1,
-      name: "mouse ",
-      price: 200,
-      count: 1,
-      isLoading: false,
-    },
-    {
-      id: 2,
-      name: "keyboard",
-      price: 300,
-      count: 1,
-      isLoading: false,
-    },
-  ]);
+  const [productInfos, setProductInfos] = useState(products);
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,23 +15,13 @@ export default function Products() {
 
   useEffect(() => {
     async function fetchDatas() {
-      isUserLogin(await getAllUsers());
+      setIsLogin(await isUserLogin());
       setUser(await findUser(getUserFromCookie().userToken));
     }
 
     fetchDatas();
   }, []);
-
-  const isUserLogin = (userData) => {
-    let updatedData = userData.map((user) => user[0]);
-
-    let isInputLogin = updatedData.some((userID) => {
-      return getUserFromCookie().userToken === userID;
-    });
-
-    setIsLogin(isInputLogin);
-  };
-
+  
   // get product ID from Product Component
   const getProductID = (productID) => {
     if (isLogin) {

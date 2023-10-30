@@ -46,6 +46,7 @@ export default function User() {
 
     if (isSuccessed) {
       setIsSuccessed(true);
+      setIsEditing(false)
       setTimeout(() => {
         setIsSuccessed(false);
       }, 3000);

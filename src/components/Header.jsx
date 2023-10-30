@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { findUser, getUserFromCookie, getAllUsers } from "../utils";
+import { findUser, getUserFromCookie, isUserLogin } from "../utils";
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
@@ -8,22 +8,12 @@ export default function Header() {
 
   useEffect(() => {
     async function fetchUsers() {
-      isUserLogin(await getAllUsers());
+      setIsLogin(await isUserLogin());
       setUser(await findUser(getUserFromCookie().userToken));
     }
 
     fetchUsers();
   }, []);
-
-  const isUserLogin = (userData) => {
-    let updatedData = userData.map((user) => user[0]);
-
-    let isInputLogin = updatedData.some((userID) => {
-      return getUserFromCookie().userToken === userID;
-    });
-
-    setIsLogin(isInputLogin);
-  };
 
   const logOutUser = (event) => {
     event.preventDefault();

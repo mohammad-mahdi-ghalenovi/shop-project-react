@@ -30,7 +30,8 @@ export let newWidgets = [
 
 export let products = [
     {
-        id: 1, name: "Keboard", price: 200, picture: "/products/keyboard.jpg",
+        id: 1, name: "Keboard", price: 200, picture: "/products/keyboard.jpg", count: 1,
+        isLoading: false,
         sales: [
             { month: "Jan", sale: 200 },
             { month: "Feb", sale: 567 },
@@ -39,7 +40,8 @@ export let products = [
         ]
     },
     {
-        id: 2, name: "Mouse", price: 50, picture: "/products/mouse.jpg",
+        id: 2, name: "Mouse", price: 50, picture: "/products/mouse.jpg", count: 1,
+        isLoading: false,
         sales: [
             { month: "Jan", sale: 129 },
             { month: "Feb", sale: 452 },
@@ -48,7 +50,8 @@ export let products = [
         ]
     },
     {
-        id: 3, name: "Monitor", price: 400, picture: "/products/monitor.jpg",
+        id: 3, name: "Monitor", price: 400, picture: "/products/monitor.jpg", count: 1,
+        isLoading: false,
         sales: [
             { month: "Jan", sale: 447 },
             { month: "Feb", sale: 999 },
