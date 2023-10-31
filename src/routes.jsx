@@ -26,7 +26,7 @@ let routes = [
     ),
   },
   {
-    path: "/cms",
+    path: "/cms/*",
     element: <CmsHome />,
     children: [
       { path: "products", element: <CmsProducts /> },

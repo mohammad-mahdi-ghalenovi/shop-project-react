@@ -1,63 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { findUser, getUserFromCookie, getAllUsers } from "../utils";
+import { addNewUser, getAllUsers } from "../utils";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 export default function Login() {
-  const [users, setUsers] = useState([]);
-  const [name, setName] = useState("mmd");
-  const [password, setPassword] = useState("321");
-  const [getUsers, setGetUsers] = useState(false);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSucceeded, setIsSucceeded] = useState(false);
 
   let navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchUsers() {
-      setUsers(await getAllUsers());
-    }
-
-    fetchUsers();
-  }, [getUsers]);
-
-  const isUserDuplicated = () => {
-    let userInfo = {
-      name,
-      password,
-    };
-
-    let isAlreadySignUp = users.some((user) => {
-      return user[1].name === userInfo.name;
-    });
-
-    isAlreadySignUp ? console.log("this username alreadySignedUp") : addUser();
-  };
+    isSucceeded &&
+      setTimeout(() => {
+        setIsSucceeded(false);
+        navigate("/login");
+      }, 3000);
+  }, [isSucceeded]);
 
   const addUser = async () => {
-    let newUser = {
-      id: users.length + 1,
-      name,
-      password,
-      basket: [{ name: "", price: 0, count: 1 }],
-    };
-
-    await fetch(
-      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json",
-      {
-        method: "POST",
-        body: JSON.stringify(newUser),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-
-    setGetUsers((prev) => !prev);
-    setName("");
-    setPassword("");
-    navigate("/login");
+    if (name.length > 1 && password.length > 1) {
+      setIsSucceeded(await addNewUser(name, password));
+    }
   };
 
   return (
     <>
       <h1>SIGN UP</h1>
+      {isSucceeded && (
+        <Alert variant="filled" severity="success">
+          You have registered Successfully — check it out!
+        </Alert>
+      )}
       <input
         type="text"
         placeholder="Name:"
@@ -70,7 +44,7 @@ export default function Login() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <button onClick={isUserDuplicated}>Submit</button>
+      <button onClick={addUser}>Submit</button>
     </>
   );
 }

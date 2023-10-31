@@ -11,7 +11,7 @@ export default function User() {
   const [users, setUsers] = useState();
   const [user, setUser] = useState();
   const [isEditing, setIsEditing] = useState(false);
-  const [isSuccessed, setIsSuccessed] = useState(false);
+  const [isSucceeded, setIsSucceeded] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -45,10 +45,10 @@ export default function User() {
     let isSuccessed = putUser(user[0], newUser);
 
     if (isSuccessed) {
-      setIsSuccessed(true);
+      setIsSucceeded(true);
       setIsEditing(false)
       setTimeout(() => {
-        setIsSuccessed(false);
+        setIsSucceeded(false);
       }, 3000);
     }
   };
@@ -57,7 +57,7 @@ export default function User() {
     <>
       {user ? (
         <div className="user-container">
-          {isSuccessed && (
+          {isSucceeded && (
             <Alert  variant="filled" severity="success">
               User Edited Successfully — check it out!
             </Alert>

@@ -91,3 +91,38 @@ export const deleteUser = async (userID) => {
     }
   ).then((res) => console.log(res));
 };
+
+export const addNewUser = async (name, password) => {
+  let users = await getAllUsers()
+  let result = false
+
+  users = users.map(user => user[1])
+
+  let isAlreadySignUp = users.some((user) => {
+    return user.name === name;
+  });
+
+  if (isAlreadySignUp) {
+    console.log("this username alreadySignedUp")
+    return false
+  }
+
+  let newUser = {
+    id: users.length + 1,
+    name,
+    password,
+    basket: [{ name: "", price: 0, count: 1 }],
+  };
+
+  await fetch(
+    "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json",
+    {
+      method: "POST",
+      body: JSON.stringify(newUser),
+    }
+  )
+    .then((res) => result = true)
+    .catch((err) => result = false);
+
+  return result
+}
