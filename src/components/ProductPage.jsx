@@ -10,18 +10,6 @@ export default function ProductPage() {
   let params = useParams();
 
   useEffect(() => {
-    // let mainProduct = productInfos.find(
-    //   (product) => product.id == Number(params.productID)
-    // );
-
-    async function getProducts() {
-      setProductInfos(await getAllProducts());
-    }
-
-    getProducts();
-  }, []);
-
-  useEffect(() => {
     productInfos && setProduct(productInfos[params.productID - 1]);
   }, [productInfos]);
 

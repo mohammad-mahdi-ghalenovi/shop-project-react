@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { findUser, putUser, getUserFromCookie } from "../utils";
-import Header from "./Header";
+import { findUser, putUser, getUserFromCookie } from "../../utils";
+import Header from "../Header";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import "./Basket.css";
 
 export default function Basket() {
   const [user, setUser] = useState();
@@ -80,7 +83,7 @@ export default function Basket() {
     <>
       <Header />
       <h1>Basket</h1>
-      {user &&
+      {user ? (
         user.basket
           .slice(1)
           .filter((product) => product.id !== 0)
@@ -97,7 +100,12 @@ export default function Basket() {
                 Delete
               </button>
             </h2>
-          ))}
+          ))
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      )}
 
       <h1>total Price : {totalPrice ? totalPrice : 0}</h1>
     </>

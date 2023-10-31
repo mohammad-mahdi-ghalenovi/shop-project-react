@@ -32,8 +32,6 @@ export default function PrivateRoute({ children }) {
     <div>Loading...</div>
   ) : isLogin ? (
     <>
-      <h1>Name : {user && user[1].name}</h1>
-      <h1>Password : {user && user[1].password}</h1>
       {children}
     </>
   ) : (
