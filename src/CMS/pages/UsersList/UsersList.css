@@ -1,7 +1,7 @@
 .users-container {
     display: flex;
     width: 100%;
-    padding: 20px;
+    padding:  0 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -21,7 +21,7 @@
 
 .user-actions {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     color: Red;
 }
 
@@ -29,6 +29,7 @@
     margin-right: 20px;
     border: none;
     padding: 4px 14px;
+    margin: 0 10px 0 0 ;
     border-radius: 10px;
     background-color: #3AB276;
     color: white;

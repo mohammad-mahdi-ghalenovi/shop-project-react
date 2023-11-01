@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { addNewUser } from "../../../utils";
 import Alert from "@mui/material/Alert";
+import "./NewUser.css";
 
 export default function NewUser() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [isSucceeded, setIsSucceeded] = useState(false);
+  const [isSucceeded, setIsSucceeded] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
-      setIsSucceeded(false);
+      setIsSucceeded("");
     }, 3000);
   }, [isSucceeded]);
 
   const addUser = async () => {
     if (name.length > 1 && password.length > 1) {
-      setIsSucceeded(await addNewUser(name, password));
+      if (await addNewUser(name, password)) {
+        setIsSucceeded("succeeded");
+      } else {
+        setIsSucceeded("failed");
+      }
     }
   };
 
   return (
     <div className="newUser-container">
-      {isSucceeded && (
+      {isSucceeded == "succeeded" && (
         <Alert variant="filled" severity="success">
           User Added Successfully — check it out!
         </Alert>
       )}
+      {isSucceeded == "failed" && (
+        <Alert variant="filled" severity="error">
+          Username already exist — try sth else!
+        </Alert>
+      )}
+
       <div className="newUser-item">
         <span className="newUser-item__lable">Your Name : </span>
         <input

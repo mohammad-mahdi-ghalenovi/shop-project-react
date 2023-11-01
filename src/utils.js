@@ -102,27 +102,29 @@ export const addNewUser = async (name, password) => {
     return user.name === name;
   });
 
-  if (isAlreadySignUp) {
-    console.log("this username alreadySignedUp")
-    return false
+  if (!isAlreadySignUp) {
+    result = true
   }
 
-  let newUser = {
-    id: users.length + 1,
-    name,
-    password,
-    basket: [{ name: "", price: 0, count: 1 }],
-  };
 
-  await fetch(
-    "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json",
-    {
-      method: "POST",
-      body: JSON.stringify(newUser),
-    }
-  )
-    .then((res) => result = true)
-    .catch((err) => result = false);
+  if (result) {
+    let newUser = {
+      id: users.length + 1,
+      name,
+      password,
+      basket: [{ name: "", price: 0, count: 1 }],
+    };
+
+    await fetch(
+      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users.json",
+      {
+        method: "POST",
+        body: JSON.stringify(newUser),
+      }
+    )
+      .then((res) => result = true)
+      .catch((err) => result = false);
+  }
 
   return result
 }
