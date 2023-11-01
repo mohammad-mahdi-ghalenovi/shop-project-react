@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import { findUser, putUser, getUserFromCookie, isUserLogin } from "../utils";
@@ -10,7 +11,6 @@ export default function Products() {
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-
   useEffect(() => {
     async function fetchDatas() {
       setIsLogin(await isUserLogin());
@@ -19,15 +19,17 @@ export default function Products() {
 
     fetchDatas();
   }, []);
-  
+
+  let navigate = useNavigate();
+
   // get product ID from Product Component
   const getProductID = (productID) => {
-      addProductToCart(productID);
+    addProductToCart(productID);
   };
 
   const loginNotifHandler = () => {
-    alert("login first")
-  }
+    alert("login first");
+  };
 
   const addProductToCart = async (productID) => {
     let mainProduct = productInfos.find((product) => product.id === productID);
@@ -56,6 +58,7 @@ export default function Products() {
   };
 
   const redirectToProductPage = (productID) => {
+    console.log(productID);
     navigate(`/product/${productID}`);
   };
 
