@@ -11,6 +11,7 @@ import CmsNewUser from "./CMS/pages/NewUser/NewUser";
 import CmsUser from "./CMS/pages/User/User";
 import CmsProducts from "./CMS/pages/Products/Products";
 import CmsProduct from "./CMS/pages/Product/Product";
+import CmsNewProduct from "./CMS/pages/NewProduct/NewProduct";
 
 let routes = [
   { path: "/", element: <Home /> },
@@ -32,6 +33,7 @@ let routes = [
       { path: "products", element: <CmsProducts /> },
       { path: "users", element: <CmsUsersList /> },
       { path: "newUser", element: <CmsNewUser /> },
+      { path: "newProduct", element: <CmsNewProduct /> },
       { path: "products", element: <CmsProducts /> },
       { path: "product/:productID", element: <CmsProduct /> },
       { path: "user/:userID", element: <CmsUser /> },

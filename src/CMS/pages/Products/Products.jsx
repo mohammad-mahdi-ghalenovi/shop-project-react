@@ -2,21 +2,20 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import { products } from "../../../data";
-// import { getAllUsers } from "../../utils";
+import { getAllProducts } from "../../../utils";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 import "./Products.css";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState(products);
+  const [productInfos, setProductInfos] = useState();
 
   useEffect(() => {
-    let users;
-    const getUserInfos = async () => {
-      // users = await getAllUsers();
-      console.log(users);
+    const getProducts = async () => {
+      setProductInfos((await getAllProducts()).map((product) => product[1]));
     };
 
-    getUserInfos();
+    getProducts();
   }, []);
 
   const removeProduct = (productID) => {
@@ -49,7 +48,10 @@ export default function Products() {
       renderCell: (params) => {
         return (
           <div className="products-actions">
-            <Link to={`/cms/product/${params.row.id}`} className="actions__button">
+            <Link
+              to={`/cms/product/${params.row.id}`}
+              className="actions__button"
+            >
               Edit
             </Link>
             <DeleteOutlineIcon
@@ -64,7 +66,13 @@ export default function Products() {
 
   return (
     <div className="products-container">
-      <DataGrid columns={columns} rows={productInfos} />
+      {productInfos ? (
+        <DataGrid columns={columns} rows={productInfos} />
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      )}
     </div>
   );
 }

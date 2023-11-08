@@ -144,3 +144,38 @@ export const addNewUser = async (name, password) => {
 
   return result
 }
+
+export const addNewProduct = async (productObj) => {
+  let products = await getAllProducts()
+  let result = false
+
+  products = products.map(product => product[1])
+
+  let isAlreadyAdded = products.some((product) => {
+    return product.name === productObj.name;
+  });
+
+  if (!isAlreadyAdded) {
+    result = true
+  }
+
+
+  if (result) {
+    let newProduct = {
+      id: products.length + 1,
+      ...productObj
+    };
+
+    await fetch(
+      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products.json",
+      {
+        method: "POST",
+        body: JSON.stringify(newProduct),
+      }
+    )
+      .then((res) => result = true)
+      .catch((err) => result = false);
+  }
+
+  return result
+}

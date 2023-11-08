@@ -5,11 +5,13 @@ import User from "./pages/User/User";
 import Products from "./pages/Products/Products";
 import Product from "./pages/Product/Product";
 import NotFound from "./pages/NotFound/NotFound";
+import NewProduct from "./pages/NewProduct/NewProduct";
 
 let routes = [
   { path: "/", element: <Home /> },
   { path: "/users", element: <UsersList /> },
   { path: "/newUser", element: <NewUser /> },
+  { path: "/newProduct", element: <NewProduct /> },
   { path: "/products", element: <Products /> },
   { path: "/product/:productID", element: <Product /> },
   { path: "/user/:userID", element: <User /> },

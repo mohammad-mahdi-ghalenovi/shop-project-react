@@ -5,6 +5,7 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PersonIcon from "@mui/icons-material/Person";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import FeedbackIcon from "@mui/icons-material/Feedback";
@@ -50,6 +51,10 @@ export default function SideBar() {
             <Link className="sideBar__link" to="/cms/products">
               <Inventory2Icon className="icon" />
               Products
+            </Link>
+            <Link className="sideBar__link" to="/cms/newProduct">
+              <ProductionQuantityLimitsIcon className="icon" />
+              New Product
             </Link>
             <Link className="sideBar__link">
               <AttachMoneyIcon className="icon" />
