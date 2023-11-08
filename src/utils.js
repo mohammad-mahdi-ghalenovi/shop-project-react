@@ -108,6 +108,15 @@ export const deleteUser = async (userID) => {
   ).then((res) => console.log(res));
 };
 
+export const deleteProduct = async (productID) => {
+  await fetch(
+    `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products/${productID}.json`,
+    {
+      method: "DELETE",
+    }
+  ).then((res) => console.log(res));
+};
+
 export const addNewUser = async (name, password) => {
   let users = await getAllUsers()
   let result = false

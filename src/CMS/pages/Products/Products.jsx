@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import { getAllProducts } from "../../../utils";
+import { getAllProducts  ,deleteProduct} from "../../../utils";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import "./Products.css";
@@ -12,14 +12,20 @@ export default function Products() {
 
   useEffect(() => {
     const getProducts = async () => {
-      setProductInfos((await getAllProducts()).map((product) => product[1]));
+      setProductInfos(await getAllProducts());
     };
 
     getProducts();
   }, []);
 
-  const removeProduct = (productID) => {
-    setProductInfos(productInfos.filter((product) => product.id !== productID));
+  const removeProduct = async (productID) => {
+    let mainProduct = productInfos.find((product) => {
+      return product[1].id == productID;
+    });
+
+    await deleteProduct(mainProduct[0]);
+
+    setProductInfos(productInfos.filter((product) => product[1].id !== productID));
   };
 
   let columns = [
@@ -67,7 +73,10 @@ export default function Products() {
   return (
     <div className="products-container">
       {productInfos ? (
-        <DataGrid columns={columns} rows={productInfos} />
+        <DataGrid
+          columns={columns}
+          rows={productInfos.map((product) => product[1])}
+        />
       ) : (
         <Box sx={{ width: "100%" }}>
           <LinearProgress />

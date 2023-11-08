@@ -19,8 +19,8 @@ export default function UserList() {
   }, []);
 
   const removeUser = async (userID) => {
-    let mainUser = users.find((product) => {
-      return product[1].id == userID;
+    let mainUser = users.find((user) => {
+      return user[1].id == userID;
     });
 
     await deleteUser(mainUser[0]);
@@ -29,7 +29,7 @@ export default function UserList() {
   };
 
   let columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "ID", width: 90 }, 
     {
       field: "user",
       headerName: "User",
