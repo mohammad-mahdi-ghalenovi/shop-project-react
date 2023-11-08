@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import { findUser, putUser, getUserFromCookie, isUserLogin } from "../utils";
-import { products } from "./../data";
+import { getAllProducts } from "../utils";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState(products);
+  const [productInfos, setProductInfos] = useState();
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +17,7 @@ export default function Products() {
     async function fetchDatas() {
       setIsLogin(await isUserLogin());
       setUser(await findUser(getUserFromCookie().userToken));
+      setProductInfos((await getAllProducts()).map((product) => product[1]));
     }
 
     fetchDatas();
@@ -58,23 +61,28 @@ export default function Products() {
   };
 
   const redirectToProductPage = (productID) => {
-    console.log(productID);
     navigate(`/product/${productID}`);
   };
 
   return (
     <>
-      <div className="product-container">
-        {productInfos &&
-          productInfos.map((product) => (
-            <Product
-              key={product.id}
-              {...product}
-              getProductID={isLogin ? getProductID : loginNotifHandler}
-              redirectToProductPage={redirectToProductPage}
-            />
-          ))}
-      </div>
+      {productInfos ? (
+        <div className="product-container">
+          {productInfos &&
+            productInfos.map((product) => (
+              <Product
+                key={product.id}
+                {...product}
+                getProductID={isLogin ? getProductID : loginNotifHandler}
+                redirectToProductPage={redirectToProductPage}
+              />
+            ))}
+        </div>
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      )}
     </>
   );
 }
