@@ -1,13 +1,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "./../data";
+import { getAllProducts } from "../utils";
 
 export default function ProductPage() {
-  const [productInfos, setProductInfos] = useState(products);
+  const [productInfos, setProductsInfos] = useState();
   const [product, setProduct] = useState();
 
   let params = useParams();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      setProductsInfos((await getAllProducts()).map((product) => product[1]));
+    };
+
+    getProducts();
+  }, []);
 
   useEffect(() => {
     productInfos && setProduct(productInfos[params.productID - 1]);

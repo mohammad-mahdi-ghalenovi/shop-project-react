@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "./../../../data";
+import { getAllProducts } from "../../../utils";
 import Chart from "./../../components/Chart/Chart";
 import "./Product.css";
 
 export default function Product() {
-  const [productsInfo, setProductsInfo] = useState(products);
+  const [productsInfo, setProductsInfo] = useState();
   const [mainProduct, setMainProduct] = useState();
 
   useEffect(() => {
-    setMainProduct(
-      productsInfo.find((product) => product.id == params.productID)
-    );
+    const getProducts = async () => {
+      setProductsInfo((await getAllProducts()).map((product) => product[1]));
+    };
+
+    getProducts();
   }, []);
+
+  useEffect(() => {
+    productsInfo &&
+      setMainProduct(
+        productsInfo.find((product) => product.id == params.productID)
+      );
+  }, [productsInfo]);
 
   let params = useParams();
 
@@ -35,7 +44,7 @@ export default function Product() {
           <div className="product-infos">
             <div className="product-infos-header">
               <img
-                src={ mainProduct.picture}
+                src={mainProduct.picture}
                 alt=""
                 className="product-header__picture"
               />
