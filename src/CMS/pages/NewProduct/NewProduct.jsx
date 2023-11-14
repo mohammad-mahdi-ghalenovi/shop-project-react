@@ -14,6 +14,7 @@ export default function NewProduct() {
         name,
         price,
         picture,
+        off : 0 , 
         count: 1,
         isLoding: false,
         sales: [],

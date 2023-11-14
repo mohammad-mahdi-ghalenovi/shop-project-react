@@ -28,6 +28,10 @@
 
 .product__price {}
 
+.product__OFF {
+    color: Red;
+}
+
 /* Header */
 .header {
     position: relative;
