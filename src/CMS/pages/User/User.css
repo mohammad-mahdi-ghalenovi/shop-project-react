@@ -53,13 +53,13 @@
 }
 
 
-.user-details-controls {
+.edit-details-controls {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 
 }
 
-.user-details-controls>button {
+.edit-details-controls>button {
     border-radius: 10px;
     padding: 5px 8px;
     border: none;
@@ -67,17 +67,17 @@
     cursor: pointer;
 }
 
-.user-details__edit {
+.edit-details__edit {
     color: blue;
     background-color: #EAF3FF;
 }
 
-.user-details__edit--cancel {
+.edit-details__edit--cancel {
     color: red;
     background-color: #FDF1F2;
 }
 
-.user-details__submit {
+.edit-details__submit {
     color: green;
     background-color: #E5FCF3;
 }

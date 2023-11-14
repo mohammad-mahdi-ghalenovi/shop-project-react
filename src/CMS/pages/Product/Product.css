@@ -1,18 +1,23 @@
 .product-container {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+}
+
+.product-wrapper {
     display: flex;
     width: 100%;
-    justify-content: space-around;
-    padding: 0 20px;
+    justify-content: space-between;
     gap: 20px;
     height: 270px;
 }
 
 .product-chart {
-    grid-column: 1/2;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 100%;
 }
 
+/* product-infos */
 .product-infos {
     display: flex;
     flex-direction: column;
@@ -59,6 +64,27 @@
     color: gray;
 }
 
-.product-controls {
-    grid-row: -1/-2;
+/* Product Edit */
+.product-edit {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.product-edit-input {
+    padding: 9px 20px;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.product-edit-submit {
+    position: absolute;
+    top: 100px;
+    padding: 9px 20px;
+    border: none;
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+    cursor: pointer;
 }

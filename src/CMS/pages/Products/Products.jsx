@@ -45,7 +45,7 @@ export default function Products() {
           </div>
         );
       },
-      width: 150,
+      width: 350,
     },
     { field: "price", headerName: "Price", width: 90 },
     {

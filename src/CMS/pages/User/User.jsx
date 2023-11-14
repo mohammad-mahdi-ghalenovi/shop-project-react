@@ -95,12 +95,12 @@ export default function User() {
 
             <span>Basket Length : {user[1].basket.length - 1} </span>
 
-            <div className="user-details-controls">
+            <div className="edit-details-controls">
               <button
                 className={
                   isEditing
-                    ? "user-details__edit--cancel "
-                    : "user-details__edit"
+                    ? "edit-details__edit--cancel "
+                    : "edit-details__edit"
                 }
                 onClick={editToggler}
               >
@@ -108,7 +108,7 @@ export default function User() {
               </button>
               {isEditing && (
                 <button
-                  className="user-details__submit"
+                  className="edit-details__submit"
                   onClick={submitEditedUser}
                 >
                   Submit Changes

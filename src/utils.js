@@ -68,22 +68,6 @@ export const getAllUsers = async () => {
   return result;
 };
 
-export const getAllProducts = async () => {
-  const getProducts = async () => {
-    let fetchedData = await fetch(
-      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products.json"
-    );
-    let response = await fetchedData.json();
-    const userData = Object.entries(response);
-    // do something with userData
-    return userData;
-  };
-
-  let result = await getProducts();
-
-  return result;
-};
-
 export const getUserFromCookie = () => {
   let cookies = document.cookie;
   let slicedArray = cookies.split(";").map((info) => {
@@ -102,15 +86,6 @@ export const getUserFromCookie = () => {
 export const deleteUser = async (userID) => {
   await fetch(
     `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/users/${userID}.json`,
-    {
-      method: "DELETE",
-    }
-  ).then((res) => console.log(res));
-};
-
-export const deleteProduct = async (productID) => {
-  await fetch(
-    `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products/${productID}.json`,
     {
       method: "DELETE",
     }
@@ -154,6 +129,33 @@ export const addNewUser = async (name, password) => {
   return result
 }
 
+// Products 📳📳
+
+export const getAllProducts = async () => {
+  const getProducts = async () => {
+    let fetchedData = await fetch(
+      "https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products.json"
+    );
+    let response = await fetchedData.json();
+    const userData = Object.entries(response);
+    // do something with userData
+    return userData;
+  };
+
+  let result = await getProducts();
+
+  return result;
+};
+
+export const deleteProduct = async (productID) => {
+  await fetch(
+    `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products/${productID}.json`,
+    {
+      method: "DELETE",
+    }
+  ).then((res) => console.log(res));
+};
+
 export const addNewProduct = async (productObj) => {
   let products = await getAllProducts()
   let result = false
@@ -187,4 +189,24 @@ export const addNewProduct = async (productObj) => {
   }
 
   return result
+}
+
+export const putProduct = async (productObj, productID) => {
+  let result = false;
+
+  await fetch(
+    `https://sabzlearn-dashboard-default-rtdb.firebaseio.com/products/${productID}.json`, {
+    method: "PUT",
+    body: JSON.stringify(productObj),
+  }
+  )
+    .then(res => {
+      if (res) {
+        result = true
+      }
+    })
+    .catch(err => result = false)
+
+  return result
+
 }
