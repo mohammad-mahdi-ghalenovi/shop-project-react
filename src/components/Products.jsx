@@ -8,7 +8,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 
 export default function Products() {
-  const [productInfos, setProductInfos] = useState();
+  const [incomeProductInfo, setIncomeProductInfo] = useState();
+  const [productInfo, setProductInfo] = useState();
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,13 +18,27 @@ export default function Products() {
     async function fetchDatas() {
       setIsLogin(await isUserLogin());
       setUser(await findUser(getUserFromCookie().userToken));
-      setProductInfos((await getAllProducts()).map((product) => product[1]));
+      setIncomeProductInfo((await getAllProducts()).map((product) => product[1]));
     }
 
     fetchDatas();
   }, []);
 
+  useEffect(() => {
+    if (incomeProductInfo) {
+      let newProducts = [...incomeProductInfo];
+
+      newProducts.forEach((product) => {
+        product.price = product.price - product.price * (product.off / 100);
+      });
+
+      setProductInfo(newProducts);
+    }
+  }, [incomeProductInfo]);
+
   let navigate = useNavigate();
+
+
 
   // get product ID from Product Component
   const getProductID = (productID) => {
@@ -35,7 +50,7 @@ export default function Products() {
   };
 
   const addProductToCart = async (productID) => {
-    let mainProduct = productInfos.find((product) => product.id === productID);
+    let mainProduct = productInfo.find((product) => product.id === productID);
     let isCount = false;
 
     mainProduct.isLoading = true;
@@ -66,10 +81,10 @@ export default function Products() {
 
   return (
     <>
-      {productInfos ? (
+      {productInfo ? (
         <div className="product-container">
-          {productInfos &&
-            productInfos.map((product) => (
+          {productInfo &&
+            productInfo.map((product) => (
               <Product
                 key={product.id}
                 {...product}

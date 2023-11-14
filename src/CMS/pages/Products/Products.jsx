@@ -48,6 +48,7 @@ export default function Products() {
       width: 350,
     },
     { field: "price", headerName: "Price", width: 90 },
+    { field: "off", headerName: "OFF %", width: 90 },
     {
       field: "action",
       headerName: "Action",

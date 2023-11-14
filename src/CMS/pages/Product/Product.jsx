@@ -10,6 +10,7 @@ export default function Product() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [picture, setPicture] = useState("");
+  const [offPercent, setOffPercent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function Product() {
     updatedProduct.name = name;
     updatedProduct.price = price;
     updatedProduct.picture = picture;
+    updatedProduct.off = offPercent;
 
     let isSuccess = await putProduct(updatedProduct, mainProduct[0]);
 
@@ -96,6 +98,10 @@ export default function Product() {
                 <p className="title">In Stoke :</p>
                 <p className="content">YES</p>
               </span>
+              <span className="list__item">
+                <p className="title">OFF :</p>
+                <p className="content">{mainProduct[1].off} %</p>
+              </span>
             </div>
           </div>
         )}
@@ -123,6 +129,13 @@ export default function Product() {
             className="product-edit-input"
             value={isEditing ? picture : mainProduct[1].picture}
             onChange={(e) => setPicture(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="New Offer:"
+            className="product-edit-input"
+            value={isEditing ? offPercent : mainProduct[1].off}
+            onChange={(e) => setOffPercent(e.target.value)}
           />
 
           <div className="edit-details-controls">

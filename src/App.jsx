@@ -13,4 +13,4 @@ export default function App() {
     </div>
   );
 }
-//   Edit Product in Cms should create:)))))))))))))))) + Off feature
+//   Off feature on products + add success notif in pages wich is necessary
