@@ -50,6 +50,8 @@ export default function User() {
       setTimeout(() => {
         setIsSucceeded(false);
       }, 3000);
+
+      setUser([user[0] , newUser])
     }
   };
 
