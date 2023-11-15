@@ -13,4 +13,4 @@ export default function App() {
     </div>
   );
 }
-//   Off feature on products + add success notif in pages wich is necessary
+//   Off feature on basket when a user already has a product and if the offer end what should i do :) + add success notif in pages wich is necessary

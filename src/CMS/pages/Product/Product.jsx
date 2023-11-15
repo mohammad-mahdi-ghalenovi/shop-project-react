@@ -34,6 +34,7 @@ export default function Product() {
     setName(mainProduct[1].name);
     setPrice(mainProduct[1].price);
     setPicture(mainProduct[1].picture);
+    setOffPercent(mainProduct[1].off);
 
     setIsEditing((prev) => !prev);
   };
