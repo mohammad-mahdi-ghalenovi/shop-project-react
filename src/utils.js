@@ -109,7 +109,7 @@ export const addNewUser = async (name, password) => {
 
   if (result) {
     let newUser = {
-      id: users.length + 1,
+      id: findBiggestID(users) + 1,
       name,
       password,
       basket: [{ name: "", price: 0, count: 1 }],
@@ -157,9 +157,8 @@ export const deleteProduct = async (productID) => {
 };
 
 export const addNewProduct = async (productObj) => {
-  let products = await getAllProducts()
-  let result = false
-
+  let products = await getAllProducts();
+  let result = false;
   products = products.map(product => product[1])
 
   let isAlreadyAdded = products.some((product) => {
@@ -173,7 +172,7 @@ export const addNewProduct = async (productObj) => {
 
   if (result) {
     let newProduct = {
-      id: products.length + 1,
+      id: findBiggestID(products) + 1,
       ...productObj
     };
 
@@ -209,4 +208,21 @@ export const putProduct = async (productObj, productID) => {
 
   return result
 
+}
+
+const findBiggestID = (array) => {
+
+  let sortedIdNumbers = []
+
+  array.forEach(obj => {
+    sortedIdNumbers.push(obj.id) // an array with all objects ID
+  })
+
+  sortedIdNumbers = sortedIdNumbers.sort().reverse() // sort the array from big to small to find the biggest ID
+
+  if (sortedIdNumbers[0] === 0) { // for first init
+    sortedIdNumbers[0] = 1
+  }
+
+  return sortedIdNumbers[0] * 1
 }

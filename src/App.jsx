@@ -14,3 +14,4 @@ export default function App() {
   );
 }
 //   Off feature on basket when a user already has a product and if the offer end what should i do :) + add success notif in pages wich is necessary
+// add CMS tag in cms styles

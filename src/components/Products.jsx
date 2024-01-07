@@ -82,7 +82,7 @@ export default function Products() {
   return (
     <>
       {productInfo ? (
-        <div className="product-container">
+        <div className="products-container">
           {productInfo &&
             productInfo.map((product) => (
               <Product

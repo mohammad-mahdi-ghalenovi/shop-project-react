@@ -72,7 +72,7 @@ export default function Products() {
   ];
 
   return (
-    <div className="products-container">
+    <div className="cms-products-container">
       {productInfos ? (
         <DataGrid
           columns={columns}
