@@ -25,7 +25,9 @@ export default function Basket() {
       user.basket
         .filter((product) => product.id !== 0)
         .map((product) => {
-          sum = sum + product.count * product.price;
+          if (product.price) {
+            sum = sum + product.count * product.price;     
+          }
           setTotalPrice(sum);
         });
     async function putNewBasket() {

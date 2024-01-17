@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 export default function Products() {
   const [incomeProductInfo, setIncomeProductInfo] = useState();
   const [productInfo, setProductInfo] = useState();
+  const [productInfoWithoutOff, setProductInfoWithoutOff] = useState();
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,9 @@ export default function Products() {
     async function fetchDatas() {
       setIsLogin(await isUserLogin());
       setUser(await findUser(getUserFromCookie().userToken));
-      setIncomeProductInfo((await getAllProducts()).map((product) => product[1]));
+      setIncomeProductInfo(
+        (await getAllProducts()).map((product) => product[1])
+      );
     }
 
     fetchDatas();
@@ -36,9 +39,18 @@ export default function Products() {
     }
   }, [incomeProductInfo]);
 
+  useEffect(() => {
+    if (productInfo) {
+      const productsWithoutOff2 = productInfo.map((product) => ({
+        ...product,
+        price: product.price / (1 - product.off / 100),
+      }));
+
+      setProductInfoWithoutOff(productsWithoutOff2);
+    }
+  }, [productInfo]);
+
   let navigate = useNavigate();
-
-
 
   // get product ID from Product Component
   const getProductID = (productID) => {
@@ -88,6 +100,7 @@ export default function Products() {
               <Product
                 key={product.id}
                 {...product}
+                productInfoWithoutOff={productInfoWithoutOff}
                 getProductID={isLogin ? getProductID : loginNotifHandler}
                 redirectToProductPage={redirectToProductPage}
               />
