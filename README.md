@@ -1,4 +1,4 @@
-a shop project 
+a shop project created with React Js and Firebase 
 
 has ability to : 
 1- sign up , sign in , logout 
